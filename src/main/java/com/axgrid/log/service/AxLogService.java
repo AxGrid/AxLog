@@ -32,7 +32,7 @@ public class AxLogService {
     @Value("${ax.log.service.host:localhost}")
     String host;
 
-    @Value("${ax.log.service.post:5000}")
+    @Value("${ax.log.service.port:5000}")
     int port;
 
     @Scheduled(fixedDelay = 2000)
