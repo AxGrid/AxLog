@@ -1,0 +1,3 @@
+logging:
+  level:
+    com.axgrid.log: trace
