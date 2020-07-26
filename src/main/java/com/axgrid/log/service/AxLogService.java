@@ -12,6 +12,7 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.PreDestroy;
 import java.io.BufferedOutputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -66,7 +67,13 @@ public class AxLogService {
             socket.close();
         }catch (ConnectException e) {
             log.error("Connect to {}:{} exception: {}", host, port, e.getMessage());
+            throw e;
         }
+    }
+
+    @PreDestroy
+    public void preDestroy() throws IOException {
+        this.sendLog();
     }
 
     @Async

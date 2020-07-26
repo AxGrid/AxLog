@@ -9,4 +9,5 @@ public interface AxLogRepository {
     void add(IAxLog log);
     List<IAxLog> get();
     void done();
+    int size();
 }

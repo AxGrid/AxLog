@@ -25,6 +25,7 @@ public class AxLogMemoryRepository implements AxLogRepository {
         logs.add(logz);
     }
 
+    public int size() {return logs.size();}
 
 
     public List<IAxLog> get() {
