@@ -8,6 +8,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.env.Environment;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
@@ -27,6 +28,9 @@ public class AxLogService {
 
     @Autowired
     AxLogRepository repository;
+
+    @Autowired
+    Environment env;
 
     final ObjectMapper mapper = new ObjectMapper();
 
@@ -78,6 +82,7 @@ public class AxLogService {
 
     @Async
     public void add(AxLog log) {
+        log.setProfiles(env.getActiveProfiles());
         repository.add(log);
         if (log.getLevel() == AxLogLevel.Warn ||
             log.getLevel() == AxLogLevel.Error ||
