@@ -63,6 +63,7 @@ public class AxLogService {
 
     private void send(String text) throws IOException {
         if (log.isTraceEnabled()) log.trace("send logs to {}:{} {}", host, port, text);
+        if (host == null || host.isEmpty()) return;
         try {
             Socket socket = new Socket(host, port);
             DataOutputStream os = new DataOutputStream(new BufferedOutputStream(socket.getOutputStream()));
